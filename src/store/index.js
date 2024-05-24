@@ -625,22 +625,22 @@ export default createStore({
 
       switch (true) {
         case netPart2A13 > 2000000:
-          taxPart2A14 = 1265000;
+          taxPart2A14 = (netPart2A13 - 2000000) * 0.3 + 365000;
           break;
         case netPart2A13 > 1000000:
-          taxPart2A14 = 365000;
+          taxPart2A14 = (netPart2A13 - 1000000) * 0.25 + 115000;
           break;
         case netPart2A13 > 750000:
-          taxPart2A14 = 115000;
+          taxPart2A14 = (netPart2A13 - 750000) * 0.2 + 65000;
           break;
         case netPart2A13 > 500000:
-          taxPart2A14 = 65000;
+          taxPart2A14 = (netPart2A13 - 500000) * 0.15 + 27500;
           break;
         case netPart2A13 > 300000:
-          taxPart2A14 = 27500;
+          taxPart2A14 = (netPart2A13 - 300000) * 0.1 + 7500;
           break;
         case netPart2A13 > 150000:
-          taxPart2A14 = 7500;
+          taxPart2A14 = (netPart2A13 - 150000) * 0.05;
           break;
         default:
           taxPart2A14 = 0;
