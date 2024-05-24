@@ -413,20 +413,14 @@
                     v-if="current < steps.length - 1"
                     type="primary"
                     @click="next"
-                    >Next</a-button
+                    >ถัดไป</a-button
                   >
-                  <a-button
-                    v-if="current == steps.length - 1"
-                    type="primary"
-                    @click="message.success('Processing complete!')"
-                  >
-                    Done
-                  </a-button>
+
                   <a-button
                     v-if="current > 0"
                     style="margin-left: 8px"
                     @click="prev"
-                    >Previous</a-button
+                    >ย้อนกลับ</a-button
                   >
                 </div>
               </div>
@@ -434,7 +428,7 @@
               <template #extra>
                 <a-space>
                   <a-button @click="onClose">Cancel</a-button>
-                  <a-button type="primary" @click="onClose">Submit</a-button>
+                  <a-button type="primary" @click="submitForm">Submit</a-button>
                 </a-space>
               </template>
             </a-drawer>
@@ -448,6 +442,7 @@
 <script setup>
 import { computed, onMounted, ref, reactive } from "vue";
 import { useStore } from "vuex";
+import { message } from "ant-design-vue";
 import {
   EditOutlined,
   MinusCircleOutlined,
@@ -471,6 +466,8 @@ const dynamicValidateForm = reactive({
       ? []
       : [{ value: "", key: Date.now }],
 });
+
+const key = "updatable";
 
 const steps = [
   {
@@ -670,14 +667,13 @@ const prev = () => {
 };
 
 const submitForm = () => {
-  formRef.value
-    .validate()
-    .then(() => {
-      console.log("values", dynamicValidateForm.domains);
-    })
-    .catch((error) => {
-      console.log("error", error);
-    });
+  message.success({
+    content: "อัปเดตข้อมูลสำเร็จ",
+    key,
+    duration: 2,
+  });
+  dynamicValidateForm.domains = [];
+  open.value = false;
 };
 const formItemLayout = {
   labelCol: {
