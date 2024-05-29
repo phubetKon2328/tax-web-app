@@ -700,6 +700,10 @@ export default createStore({
       state.taxSumPart3.sum_part3 = sumPart3;
       state.taxSumPart3.child_deduction = childDeduction;
     },
+    updateForm(state, { id, form }) {
+      state.taxData[id].tax.part3.salary_p3 = form.value.part3.salary_p3;
+      state.taxData[id].tax.part2.salary = form.value.salary;
+    },
   },
   actions: {
     async fetchTaxData({ commit }) {
@@ -712,6 +716,9 @@ export default createStore({
     },
     getSumPart2({ commit }, id) {
       commit("setSumPart2", id);
+    },
+    updateForm({ commit }, id) {
+      commit("updateForm", id);
     },
   },
   getters: {

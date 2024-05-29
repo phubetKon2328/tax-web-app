@@ -428,7 +428,9 @@
               <template #extra>
                 <a-space>
                   <a-button @click="onClose">Cancel</a-button>
-                  <a-button type="primary" @click="submitForm">Submit</a-button>
+                  <a-button type="primary" @click="submitForm(currentKey)"
+                    >Submit</a-button
+                  >
                 </a-space>
               </template>
             </a-drawer>
@@ -457,6 +459,7 @@ const current = ref(0);
 const currentKey = ref(0);
 const form = ref();
 const formRef = ref();
+const salary = ref(123);
 
 const taxData = computed(() => store.getters.getTaxData);
 
@@ -666,9 +669,14 @@ const prev = () => {
   current.value--;
 };
 
-const submitForm = () => {
+const submitForm = (id) => {
+  form.value.salary = form.value.salary ? parseInt(form.value.salary) : null; // แปลงค่าเป็นตัวเลข
+  form.value.part3.salary_p3 = form.value.part3.salary_p3
+    ? parseInt(form.value.part3.salary_p3)
+    : null;
+  store.dispatch("updateForm", { id, form });
   message.success({
-    content: "อัปเดตข้อมูลสำเร็จ",
+    content: "อัปเดตข้อมูลสำเร็จ" + id,
     key,
     duration: 2,
   });
