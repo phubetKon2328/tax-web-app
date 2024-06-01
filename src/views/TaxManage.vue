@@ -246,9 +246,14 @@
                       <a-col :span="13">
                         <h3 style="text-align: left">
                           อุปการะเลี้ยงดูบิดามารดา
+                          <Tooltip>
+                            อายุมากกว่า 60 ปีขึ้นไป <br />
+                            สามารถลดหย่อนได้คนละ 30,000 บาท
+                          </Tooltip>
                         </h3>
                         <hr />
                       </a-col>
+
                       <div>
                         <h4 style="text-align: left">บิดาผู้มีเงินได้</h4>
                         <a-input-group>
@@ -329,6 +334,7 @@
                         <h4 style="text-align: left">
                           อุปการะเลี้ยงดูคนพิการหรือคนทุพพลภาพ (ยกมาจากแบบ
                           ล.ย.04)
+                          <Tooltip> ลดหย่อนได้ 600,000 บาท </Tooltip>
                         </h4>
                         <a-input-group>
                           <a-input
@@ -343,10 +349,14 @@
                       </div>
 
                       <div>
-                        <div></div>
-                        <h4 style="text-align: left">
+                        <h3 style="text-align: left">
                           เบี้ยประกันสุขภาพบิดามารดาของผู้มีเงินได้และคู่สมรส
-                        </h4>
+                          <Tooltip>
+                            มีเงินได้ไม่เกิน 30,000 บาท <br />
+                            ลดหย่อนได้ไม่เกิน 15,000
+                          </Tooltip>
+                        </h3>
+                        <hr />
                         <a-input-group>
                           <a-input
                             name="health_insurance_income_earner_spouse"
@@ -404,6 +414,263 @@
                             />
                           </a-input-group>
                         </div>
+
+                        <div>
+                          <h4 style="text-align: left">
+                            เบี้ยประกันชีวิต
+                            <Tooltip>
+                              เบี้ยประกันชีวิต+เบี้ยประกันสุขภาพ <br />
+                              รวมกันไม่เกิน 100,000 บาท <br />
+                              กรมธรรม์อายุ 10 ปีขึ้นไป
+                            </Tooltip>
+                          </h4>
+                          <a-input-group>
+                            <a-input
+                              name="life_insurance"
+                              v-model:value="form.part3.life_insurance"
+                              style="width: 30%"
+                              placeholder="ลดหย่อนได้ 25,000 บาท"
+                            />
+                          </a-input-group>
+                        </div>
+
+                        <div>
+                          <h4 style="text-align: left">เบี้ยประกันสุขภาพ</h4>
+                          <a-input-group>
+                            <a-input
+                              name="health_insurance"
+                              v-model:value="form.part3.health_insurance"
+                              style="width: 30%"
+                              placeholder="ลดหย่อนได้ 100,000 บาท"
+                            />
+                          </a-input-group>
+                        </div>
+
+                        <div>
+                          <h4 style="text-align: left">
+                            เบี้ยประกันชีวิตแบบบำนาญ
+                            <Tooltip>
+                              ลดหย่อนได้ 15% ของเงินได้ <br />
+                              แต่ไม่เกิน 200,000 บาท
+                            </Tooltip>
+                          </h4>
+                          <a-input-group>
+                            <a-input
+                              name="pension_life_insurance"
+                              v-model:value="form.part3.pension_life_insurance"
+                              style="width: 30%"
+                              placeholder=""
+                            />
+                          </a-input-group>
+                        </div>
+
+                        <div>
+                          <h4 style="text-align: left">
+                            เงินสะสมกองทุนการออมแห่งชาติ
+                            <Tooltip> ลดหย่อนได้ 13,200 บาท </Tooltip>
+                          </h4>
+                          <a-input-group>
+                            <a-input
+                              name="national_savings_fund_savings"
+                              v-model:value="
+                                form.part3.national_savings_fund_savings
+                              "
+                              style="width: 30%"
+                              placeholder=""
+                            />
+                          </a-input-group>
+                        </div>
+
+                        <div>
+                          <h4 style="text-align: left">
+                            ค่าซื้อหน่วยลงทุนในกองทุนรวมเพื่อการเลี้ยงชีพ
+                            <Tooltip>
+                              ลดหย่อนได้ 30% ของเงินได้ <br />
+                              แต่ไม่เกินไม่เกิน 500,000 บาท
+                            </Tooltip>
+                          </h4>
+                          <a-input-group>
+                            <a-input
+                              name="cost_purchasing_RMF"
+                              v-model:value="form.part3.cost_purchasing_RMF"
+                              style="width: 30%"
+                              placeholder=""
+                            />
+                          </a-input-group>
+                        </div>
+
+                        <div>
+                          <h4 style="text-align: left">
+                            ค่าซื้อหน่วยลงทุนในกองทุนรวมหุ้นระยะยาว
+                            <Tooltip>
+                              ลดหย่อนได้ 30% ของเงินได้ <br />
+                              แต่ไม่เกินไม่เกิน 200,000 บาท
+                            </Tooltip>
+                          </h4>
+                          <a-input-group>
+                            <a-input
+                              name="cost_purchasing_LTF"
+                              v-model:value="form.part3.cost_purchasing_LTF"
+                              style="width: 30%"
+                              placeholder=""
+                            />
+                          </a-input-group>
+                        </div>
+
+                        <div>
+                          <h4 style="text-align: left">
+                            ดอกเบี้ยเงินกู้ยืมเพื่อซื้อ เชื่อซื้อ
+                            หรือสร้างอาคารอยู่อาศัย
+                            <Tooltip>
+                              ไม่เกิน 100,000 บาท <br />
+                              ต่อคน,ต่อหลัง
+                            </Tooltip>
+                          </h4>
+                          <a-input-group>
+                            <a-input
+                              name="interest_loans_buy_lease_residential_building"
+                              v-model:value="
+                                form.part3
+                                  .interest_loans_buy_lease_residential_building
+                              "
+                              style="width: 30%"
+                              placeholder=""
+                            />
+                          </a-input-group>
+                        </div>
+
+                        <div>
+                          <h4 style="text-align: left">
+                            เงินได้ที่จ่ายเพื่อซื้ออสังหาริมทรัพย์ฯ
+                          </h4>
+                          <a-input-group>
+                            <a-input
+                              name="purchase_real_estate"
+                              v-model:value="form.part3.purchase_real_estate"
+                              style="width: 30%"
+                              placeholder=""
+                            />
+                          </a-input-group>
+                        </div>
+
+                        <div>
+                          <h4 style="text-align: left">
+                            มูลค่าอสังหาริมทรัพย์
+                            <Tooltip>
+                              มูลค่าไม่เกิน 3 ล้านบาท <br />
+                              แต่ไม่เกินร้อยละ 20 ของมูลค่าอสังหาริมทรัพย์ที่เป็นอาคารพร้อมที่ดิน
+                            </Tooltip>
+                          </h4>
+                          <a-input-group>
+                            <a-input
+                              name="real_estate_value"
+                              v-model:value="form.part3.real_estate_value"
+                              style="width: 30%"
+                              placeholder=""
+                            />
+                          </a-input-group>
+                        </div>
+
+                        <div>
+                          <h4 style="text-align: left">
+                           เงินสมบทกองทุนประกันสังคม
+                          </h4>
+                          <a-input-group>
+                            <a-input
+                              name="social_security_fund"
+                              v-model:value="form.part3.social_security_fund"
+                              style="width: 30%"
+                              placeholder=""
+                            />
+                          </a-input-group>
+                        </div>
+
+                        <div>
+                          <h4 style="text-align: left">
+                            ค่าซื้อและค่าติดตั้งระบบกล้องโทรทัศน์วงจรปิด
+                            <Tooltip>
+                              เฉพาะเงินได้ตามมาตรา 40 (5) (6) (7) (8) ในเขตพัฒนาพิเศษเท่านั้น
+                            </Tooltip>
+                          </h4>
+                          <a-input-group>
+                            <a-input
+                              name="extra_part1"
+                              v-model:value="form.part3.extra_part1"
+                              style="width: 30%"
+                              placeholder=""
+                            />
+                          </a-input-group>
+                        </div>
+
+                        <div>
+                          <h4 style="text-align: left">
+                            ค่าธรรมเนียมการรับชำระเงินด้วยบัตรเครดิด
+                            <Tooltip>
+                              เฉพาะเงินได้ตามมาตรา 40 (5) (6) (7) (8) เท่านั้น
+                            </Tooltip>
+                          </h4>
+                          <a-input-group>
+                            <a-input
+                              name="extra_part2"
+                              v-model:value="form.part3.extra_part2"
+                              style="width: 30%"
+                              placeholder=""
+                            />
+                          </a-input-group>
+                        </div>
+
+                        <div>
+                          <h4 style="text-align: left">
+                            ค่าซ่อมบ้าน
+                            <Tooltip>
+                              ลดหย่อนได้ไม่เกิน 15,000 บาท
+                            </Tooltip>
+                          </h4>
+                          <a-input-group>
+                            <a-input
+                              name="extra_part3"
+                              v-model:value="form.part3.extra_part3"
+                              style="width: 30%"
+                              placeholder=""
+                            />
+                          </a-input-group>
+                        </div>
+
+                        <div>
+                          <h4 style="text-align: left">
+                            ค่าซ่อมรถ
+                            <Tooltip>
+                              ลดหย่อนได้ไม่เกิน 15,000 บาท
+                            </Tooltip>
+                          </h4>
+                          <a-input-group>
+                            <a-input
+                              name="extra_part4"
+                              v-model:value="form.part3.extra_part4"
+                              style="width: 30%"
+                              placeholder=""
+                            />
+                          </a-input-group>
+                        </div>
+
+                        <div>
+                          <h4 style="text-align: left">
+                            ค่าซื้อสินค้าหรือค่าบริการ
+                            <Tooltip>
+                              เลดหย่อนได้ไม่เกิน 15,000 บาท
+                            </Tooltip>
+                          </h4>
+                          <a-input-group>
+                            <a-input
+                              name="extra_part5"
+                              v-model:value="form.part3.extra_part5"
+                              style="width: 30%"
+                              placeholder=""
+                            />
+                          </a-input-group>
+                        </div>
+
+
                       </div>
                     </a-form>
                   </div>
@@ -445,6 +712,7 @@
 import { computed, onMounted, ref, reactive } from "vue";
 import { useStore } from "vuex";
 import { message } from "ant-design-vue";
+import Tooltip from "../components/Tooltip.vue";
 import {
   EditOutlined,
   MinusCircleOutlined,
@@ -654,6 +922,37 @@ const showDrawer = (id) => {
       health_insurance_income_earner_spouse:
         taxData.value[currentKey.value].tax.part3
           .health_insurance_income_earner_spouse,
+      life_insurance: taxData.value[currentKey.value].tax.part3.life_insurance,
+      health_insurance:
+        taxData.value[currentKey.value].tax.part3.health_insurance,
+      pension_life_insurance:
+        taxData.value[currentKey.value].tax.part3.pension_life_insurance,
+      provident_fund_savings_p3:
+        taxData.value[currentKey.value].tax.part3.provident_fund_savings_p3,
+      national_savings_fund_savings:
+        taxData.value[currentKey.value].tax.part3.national_savings_fund_savings,
+      cost_purchasing_RMF:
+        taxData.value[currentKey.value].tax.part3.cost_purchasing_RMF,
+      cost_purchasing_LTF:
+        taxData.value[currentKey.value].tax.part3.cost_purchasing_LTF,
+      interest_loans_buy_lease_residential_building:
+        taxData.value[currentKey.value].tax.part3
+          .interest_loans_buy_lease_residential_building,
+      purchase_real_estate:
+        taxData.value[currentKey.value].tax.part3.purchase_real_estate,
+      real_estate_value:
+        taxData.value[currentKey.value].tax.part3.real_estate_value,
+      social_security_fund:
+        taxData.value[currentKey.value].tax.part3.social_security_fund,
+      extra_part1: taxData.value[currentKey.value].tax.part3.extra_part1,
+      extra_part2: taxData.value[currentKey.value].tax.part3.extra_part2,
+      extra_part3: taxData.value[currentKey.value].tax.part3.extra_part3,
+      extra_part4: taxData.value[currentKey.value].tax.part3.extra_part4,
+      extra_part5: taxData.value[currentKey.value].tax.part3.extra_part5,
+      extra_other_name:
+        taxData.value[currentKey.value].tax.part3.extra_other_name,
+      extra_other_anoumt:
+        taxData.value[currentKey.value].tax.part3.extra_other_anoumt,
     },
   };
 };
@@ -668,15 +967,16 @@ const next = () => {
 const prev = () => {
   current.value--;
 };
+const parseIfNeeded = (value) => (value ? parseInt(value) : null);
 
 const submitForm = (id) => {
-  form.value.salary = form.value.salary ? parseInt(form.value.salary) : null; // แปลงค่าเป็นตัวเลข
-  form.value.part3.salary_p3 = form.value.part3.salary_p3
+  form.value.salary = parseIfNeeded(form.value.salary);
+  form.value.part3.salary_p3 = parseIfNeeded(form.value.part3.salary_p3)
     ? parseInt(form.value.part3.salary_p3)
     : null;
   store.dispatch("updateForm", { id, form });
   message.success({
-    content: "อัปเดตข้อมูลสำเร็จ" + id,
+    content: "อัปเดตข้อมูลสำเร็จ",
     key,
     duration: 2,
   });

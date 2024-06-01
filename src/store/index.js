@@ -222,7 +222,7 @@ export default createStore({
             select_disabled_persons: 1, // 0= อายุ > 65 (รวมคนพิการ), Yes = อายุ < 65
             disabled_persons_people_aged_65_years_and_over: 0,
             disabled_persons_who_not_more_than_65_years: 0,
-            compensation_labor_law: 0, //กรณีออกจากงาน คำนวณตามอายุงาน [ไม่เดิน 400k]
+            compensation_labor_law: 0, //กรณีออกจากงาน คำนวณตามอายุงาน [ไม่เกิน 400k]
             right_to_choose_to_pay_taxes: 0,
             //รายการเงินได้ที่ได้รับยกเว้น (สำหรับอายุ 65 ปีขึ้นไป หรือ คนพิการ)
             donate_educate_sport_other: 0,
@@ -604,6 +604,35 @@ export default createStore({
 
       const childDeduction = part3.child.length * 30000;
 
+      //รวม ส่วนที่ 3 ลดหย่อนภาษี
+      sumPart3 +=
+        part3.salary_p3 +
+        part3.spouse_salary +
+        childDeduction +
+        part3.income_earner_father_deduction +
+        part3.income_earner_mother_deduction +
+        part3.spouse_father_deduction +
+        part3.spouse_mother_deduction +
+        part3.support_disable_handicapped +
+        part3.health_insurance_income_earner_spouse +
+        part3.life_insurance +
+        part3.health_insurance +
+        part3.pension_life_insurance +
+        minPart3A18 +
+        part3.national_savings_fund_savings +
+        part3.cost_purchasing_RMF +
+        part3.cost_purchasing_LTF +
+        part3.interest_loans_buy_lease_residential_building +
+        part3.purchase_real_estate +
+        part3.real_estate_value +
+        part3.social_security_fund +
+        part3.extra_part1 +
+        part3.extra_part2 +
+        part3.extra_part3 +
+        part3.extra_part4 +
+        part3.extra_part5 +
+        part3.extra_other_anoumt;
+
       const totalPart2A7 = totalPart2A5 - sumPart3;
 
       const minusPart2A8 = Math.min(
@@ -666,35 +695,6 @@ export default createStore({
       state.taxSumPart2.total_part2_a16 = totalPart2A16;
       state.taxSumPart2.minus_part2_a17 = minusPart2A17;
       state.taxSumPart2.sum_max_part2_b1 = sumMaxPart2B1;
-
-      //รวม ส่วนที่ 3 ลดหย่อนภาษี
-      sumPart3 +=
-        part3.salary_p3 +
-        part3.spouse_salary +
-        childDeduction +
-        part3.income_earner_father_deduction +
-        part3.income_earner_mother_deduction +
-        part3.spouse_father_deduction +
-        part3.spouse_mother_deduction +
-        part3.support_disable_handicapped +
-        part3.health_insurance_income_earner_spouse +
-        part3.life_insurance +
-        part3.health_insurance +
-        part3.pension_life_insurance +
-        minPart3A18 +
-        part3.national_savings_fund_savings +
-        part3.cost_purchasing_RMF +
-        part3.cost_purchasing_LTF +
-        part3.interest_loans_buy_lease_residential_building +
-        part3.purchase_real_estate +
-        part3.real_estate_value +
-        part3.social_security_fund +
-        part3.extra_part1 +
-        part3.extra_part2 +
-        part3.extra_part3 +
-        part3.extra_part4 +
-        part3.extra_part5 +
-        part3.extra_other_anoumt;
 
       state.taxSumPart3.min_part3_a18 = minPart3A18;
       state.taxSumPart3.sum_part3 = sumPart3;

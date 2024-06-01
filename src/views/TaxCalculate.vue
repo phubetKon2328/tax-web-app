@@ -108,7 +108,6 @@
                       height="600px"
                     />
                   </div>
-                  <p>{{ item.tags[0] }}</p>
                 </a-collapse-panel>
               </a-collapse>
             </div>
@@ -723,8 +722,6 @@ async function processPdf(pdfUrl, currentPdfKey) {
               : ""
           ); //จำนวนเงิน
           break;
-        //------------------------ ส่วนที่ 2 ข ----------------------------------------------
-
         // เพิ่ม case สำหรับฟิลด์อื่นๆ ตามต้องการ
         default:
           break;
@@ -736,6 +733,7 @@ async function processPdf(pdfUrl, currentPdfKey) {
     // });
 
     form.updateFieldAppearances(thaiFont);
+    pdfDoc.setTitle(`${income_earner.name} ${income_earner.lastname}`);
     const pdfBytes = await pdfDoc.save();
     const blob = new Blob([pdfBytes], { type: "application/pdf" });
     getPdfUrl.value = URL.createObjectURL(blob);
@@ -761,11 +759,11 @@ const loadPdfById = async (key) => {
   store.commit("setCurrentPdfKey", key - 1);
   store.dispatch("getSumPart2", currentPdfKey.value);
   await processPdf(pdfUrl, currentPdfKey.value);
-  console.log("หลังคลิกเปิด", part2.value);
+  // console.log("หลังคลิกเปิด", part2.value);
 };
 
 onMounted(() => {
-  console.log("ก่อนคลิกเปิด", part2.value);
+  // console.log("ก่อนคลิกเปิด", part2.value);
 });
 </script>
 
