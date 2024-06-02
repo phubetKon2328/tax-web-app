@@ -75,17 +75,25 @@
                           </a-form-item>
                         </a-col>
                         <a-col :span="12">
-                          <a-form-item
-                            label="เงินสะสม กบข"
-                            name="government_pension_fund"
-                          >
-                            <a-input
-                              v-model:value="form.government_pension_fund"
-                              placeholder="ส่วนของนายจ้างสมทบ + ผลประโยชน์"
-                            />
-                          </a-form-item>
+                          <div>
+                            <h4 style="text-align: left">
+                              เงินสะสม กบข
+                              <Tooltip>
+                                ส่วนของนายจ้างสมทบ + ผลประโยชน์
+                              </Tooltip>
+                            </h4>
+                            <a-input-group>
+                              <a-input
+                                name="government_pension_fund"
+                                v-model:value="form.government_pension_fund"
+                                style="width: 30%"
+                                placeholder=""
+                              />
+                            </a-input-group>
+                          </div>
                         </a-col>
                       </a-row>
+
                       <a-row :gutter="16">
                         <a-col :span="12">
                           <a-form-item
@@ -122,10 +130,12 @@
                         <a-col :span="12">
                           <a-form-item
                             label="เงินสะสมกองทุนสำรองเลี้ยงชีพ"
-                            name="provident_fund_saving"
+                            name="provident_fund_savings_p3"
                           >
                             <a-input
-                              v-model:value="form.provident_fund_savings"
+                              v-model:value="
+                                form.part3.provident_fund_savings_p3
+                              "
                               style="width: 100%"
                             />
                           </a-form-item>
@@ -179,13 +189,18 @@
                       :disabled="!componentDisabledPart3"
                     >
                       <div>
-                        <h4 style="text-align: left">คู่สมรส</h4>
+                        <h4 style="text-align: left">
+                          คู่สมรส
+                          <Tooltip>
+                            ไม่มีเงินได้ ลดหย่อนได้ 60,000 บาท
+                          </Tooltip>
+                        </h4>
                         <a-input-group>
                           <a-input
                             name="spouse_salary"
                             v-model:value="form.part3.spouse_salary"
                             style="width: 50%"
-                            placeholder="ไม่มีเงินได้ : ลดหย่อนได้ 60000 บาท"
+                            placeholder=""
                           />
                         </a-input-group>
                       </div>
@@ -558,7 +573,8 @@
                             มูลค่าอสังหาริมทรัพย์
                             <Tooltip>
                               มูลค่าไม่เกิน 3 ล้านบาท <br />
-                              แต่ไม่เกินร้อยละ 20 ของมูลค่าอสังหาริมทรัพย์ที่เป็นอาคารพร้อมที่ดิน
+                              แต่ไม่เกินร้อยละ 20
+                              ของมูลค่าอสังหาริมทรัพย์ที่เป็นอาคารพร้อมที่ดิน
                             </Tooltip>
                           </h4>
                           <a-input-group>
@@ -573,7 +589,7 @@
 
                         <div>
                           <h4 style="text-align: left">
-                           เงินสมบทกองทุนประกันสังคม
+                            เงินสมทบทกองทุนประกันสังคม
                           </h4>
                           <a-input-group>
                             <a-input
@@ -589,7 +605,8 @@
                           <h4 style="text-align: left">
                             ค่าซื้อและค่าติดตั้งระบบกล้องโทรทัศน์วงจรปิด
                             <Tooltip>
-                              เฉพาะเงินได้ตามมาตรา 40 (5) (6) (7) (8) ในเขตพัฒนาพิเศษเท่านั้น
+                              เฉพาะเงินได้ตามมาตรา 40 (5) (6) (7) (8)
+                              ในเขตพัฒนาพิเศษเท่านั้น
                             </Tooltip>
                           </h4>
                           <a-input-group>
@@ -622,9 +639,7 @@
                         <div>
                           <h4 style="text-align: left">
                             ค่าซ่อมบ้าน
-                            <Tooltip>
-                              ลดหย่อนได้ไม่เกิน 15,000 บาท
-                            </Tooltip>
+                            <Tooltip> ลดหย่อนได้ไม่เกิน 15,000 บาท </Tooltip>
                           </h4>
                           <a-input-group>
                             <a-input
@@ -639,9 +654,7 @@
                         <div>
                           <h4 style="text-align: left">
                             ค่าซ่อมรถ
-                            <Tooltip>
-                              ลดหย่อนได้ไม่เกิน 15,000 บาท
-                            </Tooltip>
+                            <Tooltip> ลดหย่อนได้ไม่เกิน 15,000 บาท </Tooltip>
                           </h4>
                           <a-input-group>
                             <a-input
@@ -656,9 +669,7 @@
                         <div>
                           <h4 style="text-align: left">
                             ค่าซื้อสินค้าหรือค่าบริการ
-                            <Tooltip>
-                              เลดหย่อนได้ไม่เกิน 15,000 บาท
-                            </Tooltip>
+                            <Tooltip> เลดหย่อนได้ไม่เกิน 15,000 บาท </Tooltip>
                           </h4>
                           <a-input-group>
                             <a-input
@@ -669,8 +680,6 @@
                             />
                           </a-input-group>
                         </div>
-
-
                       </div>
                     </a-form>
                   </div>
@@ -735,7 +744,7 @@ const dynamicValidateForm = reactive({
   domains:
     taxData.value[currentKey.value].tax.part3.child.length > 0
       ? []
-      : [{ value: "", key: Date.now }],
+      : [{ value: "", key: Date.now() }],
 });
 
 const key = "updatable";
@@ -764,12 +773,6 @@ const rules = {
     {
       required: true,
       message: "Please enter user name",
-    },
-  ],
-  provident_fund_saving: [
-    {
-      required: true,
-      message: "please enter url",
     },
   ],
   compensation_labor_law: [
@@ -872,6 +875,7 @@ const columns = [
 
 const showDrawer = (id) => {
   currentKey.value = id;
+  console.log(taxData.value[currentKey.value].tax.part3.child);
   taxData.value[currentKey.value].tax.part3.child.map((item, index) => {
     dynamicValidateForm.domains.push({
       value: item,
@@ -881,8 +885,6 @@ const showDrawer = (id) => {
   open.value = true;
   form.value = {
     salary: taxData.value[currentKey.value].tax.part2.salary,
-    provident_fund_savings:
-      taxData.value[currentKey.value].tax.part2.provident_fund_savings,
     compensation_labor_law:
       taxData.value[currentKey.value].tax.part2.compensation_labor_law,
     government_pension_fund:
@@ -898,7 +900,9 @@ const showDrawer = (id) => {
       salary_p3: taxData.value[currentKey.value].tax.part3.salary_p3,
       spouse_salary: taxData.value[currentKey.value].tax.part3.spouse_salary,
 
-      child: taxData.value[currentKey.value].tax.part3.child ? "มีค่า" : "",
+      child: taxData.value[currentKey.value].tax.part3.child
+        ? taxData.value[currentKey.value].tax.part3.child
+        : "",
       income_earner_father_id:
         taxData.value[currentKey.value].tax.part3.income_earner_father_id,
       income_earner_mother_id:
@@ -971,6 +975,9 @@ const parseIfNeeded = (value) => (value ? parseInt(value) : null);
 
 const submitForm = (id) => {
   form.value.salary = parseIfNeeded(form.value.salary);
+  form.value.part3.child = dynamicValidateForm.domains.map((item) => {
+    return item.value;
+  });
   form.value.part3.salary_p3 = parseIfNeeded(form.value.part3.salary_p3)
     ? parseInt(form.value.part3.salary_p3)
     : null;
@@ -1028,6 +1035,10 @@ const addDomain = () => {
     key: Date.now(),
   });
 };
+
+onMounted(() => {
+  // console.log("onMounted : ", dynamicValidateForm.domains);
+});
 </script>
 
 <style scoped>

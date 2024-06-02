@@ -132,7 +132,7 @@ export default createStore({
             //(รวมกันไม่เกิน 100k) กรมธรรม์อายุ 10 ปีขึ้นไป ------------------
             //(รวมกันไม่เกิน 500k)------------------
             pension_life_insurance: 0, //15% ของเงินได้ [ไม่เกิน 200k]
-            provident_fund_savings_p3: 80000, //ไม่เกิน 10,000 บาท ส่วนที่เกิน 10,000 บาทแต่ไม่เกิน 490,000 บาท ซึ่งไม่เกินร้อยละ 15 ของค่าจ้างให้หักจากเงินได้
+            provident_fund_savings_p3: 30000, //ไม่เกิน 10,000 บาท ส่วนที่เกิน 10,000 บาทแต่ไม่เกิน 490,000 บาท ซึ่งไม่เกินร้อยละ 15 ของค่าจ้างให้หักจากเงินได้
             national_savings_fund_savings: 0, //13,200 บาท
             cost_purchasing_RMF: 0, //30% ของเงินได้ [ไม่เกิน 500k]
             cost_purchasing_LTF: 0, //30% ของเงินได้ [ไม่เกิน 200k]
@@ -701,6 +701,8 @@ export default createStore({
       state.taxSumPart3.child_deduction = childDeduction;
     },
     updateForm(state, { id, form }) {
+      state.taxData[id].tax.part3.provident_fund_savings_p3 = form.value.part3.provident_fund_savings_p3
+      state.taxData[id].tax.part3.child = form.value.part3.child
       state.taxData[id].tax.part3.salary_p3 = form.value.part3.salary_p3;
       state.taxData[id].tax.part2.salary = form.value.salary;
     },
